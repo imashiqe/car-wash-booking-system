@@ -13,7 +13,7 @@ app.use(cors());
 app.use("/api/v1", router);
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!");
+  res.send("Car Wash Booking System Server");
 });
 
 export default app;
