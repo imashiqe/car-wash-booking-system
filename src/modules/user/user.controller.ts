@@ -3,12 +3,18 @@ import { userService } from "./user.service";
 
 import userValidationSchema from "./user.validation";
 
-const createuser = async (req: Request, res: Response) => {
+const createUser = async (req: Request, res: Response) => {
   try {
     const { user: userData } = req.body;
     const zodiacsData = userValidationSchema.parse(userData);
 
-    const result = await userService.createuserIntoDB(zodiacsData);
+    // Ensure 'phone' property is always a string
+    const phone = userData.phone || "";
+
+    const result = await userService.createUserInDB({
+      ...zodiacsData,
+      phone,
+    });
 
     res.status(200).json({
       success: true,
@@ -26,7 +32,7 @@ const createuser = async (req: Request, res: Response) => {
 
 const getAlluser = async (req: Request, res: Response) => {
   try {
-    const result = await userService.getAllusersFromDB();
+    const result = await userService.getAllUsersFromDB();
     res.status(200).json({
       success: true,
       message: "All users fetched successfully",
@@ -41,7 +47,7 @@ const getSingleuser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
 
-    const result = await userService.getSingleuserFromDB(userId);
+    const result = await userService.getSingleUserFromDB(userId);
     res.status(200).json({
       success: true,
       message: " users fetched successfully",
@@ -53,7 +59,7 @@ const getSingleuser = async (req: Request, res: Response) => {
 };
 
 export default {
-  createuser,
+  createUser,
   getAlluser,
   getSingleuser,
 };
