@@ -1,6 +1,6 @@
 # Car Wash Booking System
 
-A comprehensive system for managing car wash bookings, built with Node.js, TypeScript, MongoDB, and Express.js. This application allows users to book car wash services, manage available slots, and view booking history.
+
 
 ## Live Demo
 
